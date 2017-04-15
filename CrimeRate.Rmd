@@ -1,0 +1,41 @@
+---
+title: "US Crime Rate"
+author: "Kristy Wedel"
+date: "April 15, 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(plotly)
+crimerate <- read.csv("CrimeRate.csv")
+```
+
+## Crime in the United States
+### By Volume and Rate per 100,000 Inhabitants, 1994-2013  
+
+Data from https://ucr.fbi.gov/crime-in-the-u.s/2013/crime-in-the-u.s.-2013/tables/1tabledatadecoverviewpdf/table_1_crime_in_the_united_states_by_volume_and_rate_per_100000_inhabitants_1994-2013.xls
+
+
+## Data Summary
+
+```{r crimerate, echo = TRUE}
+summary(crimerate$Year)
+summary(crimerate$Violent..crime..rate.)
+```
+
+## Year vs Crime Rate
+
+```{r pressure, warning=FALSE, message=FALSE}
+
+x <- list(
+  title = "Year"
+)
+y <- list(
+  title = "Violent Crime Rate"
+)
+p <- plot_ly(data = crimerate, x = ~Year, y = ~Violent..crime..rate., mode = "lines+markers")%>%
+  layout(xaxis = x, yaxis = y)
+p
+```
+
